@@ -3,6 +3,7 @@
 const { User, Thought } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
+const { update } = require('../models/User');
 
 const resolvers = {
     Query: {
@@ -78,6 +79,19 @@ const resolvers = {
                 );
 
                 return thought;
+            }
+
+            throw new AuthenticationError('You must be logged in to access this.');
+        },
+        addReaction: async (parent, { thoughtId, reactionBody }, context) => {
+            if (context.user) {
+                const updatedThought = await Thought.findOneAndUpdate(
+                    { _id: thoughtId },
+                    { $push: { reactions: { reactionBody, username: context.user.username } } },
+                    { new: true, runValidators: true }
+                );
+
+                return updatedThought;
             }
 
             throw new AuthenticationError('You must be logged in to access this.');
