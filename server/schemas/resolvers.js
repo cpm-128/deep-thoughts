@@ -65,6 +65,22 @@ const resolvers = {
 
             const token = signToken(user);
             return { token, user };
+        },
+        addThought: async (parent, args, context) => {
+            // if the user is loggedin as verified by the header context....
+            if (context.user) {
+                const thought = await Thought.create({ ...args, username: context.user.username });
+
+                await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { thoughts: thought._id } },
+                    { new: true }
+                );
+
+                return thought;
+            }
+
+            throw new AuthenticationError('You must be logged in to access this.');
         }
     }
 };
