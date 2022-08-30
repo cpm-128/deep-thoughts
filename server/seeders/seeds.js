@@ -1,3 +1,4 @@
+// faker is a library that generates dummy data to use
 const faker = require('faker');
 
 const db = require('../config/connection');
