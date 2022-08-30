@@ -6,6 +6,9 @@ const {ApolloServer } = require('apollo-server-express');
 // import typeDefs and resolvers
 const { typeDefs, resolvers } = require('./schemas');
 
+// import middleware to auth tokens
+const { authMiddleware } = require('./utils/auth');
+
 // db connection
 const db = require('./config/connection');
 
@@ -13,7 +16,9 @@ const PORT = process.env.PORT || 3001;
 // create a new Apollo server and pass in our schema data
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  // access the token in headers
+  context: authMiddleware
 });
 
 const app = express();
