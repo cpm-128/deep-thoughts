@@ -7,7 +7,7 @@ const resolvers = {
         // GET all thoughts
         thoughts: async (parent, { username }) => {
             const params = username ? { username } : {};
-            return Thought.find().sort({ createdAt: -1 });
+            return Thought.find(params).sort({ createdAt: -1 });
         },
         // GET single thought by id
         thought: async (parent, { _id }) => {
