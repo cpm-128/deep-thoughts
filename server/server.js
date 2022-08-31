@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 
 // import ApolloServer
 const {ApolloServer } = require('apollo-server-express');
@@ -25,6 +26,16 @@ const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// set up static assets for production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/build')));
+}
+
+// wildcard get route that will respond with product-ready front end code
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 // create a new intance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {

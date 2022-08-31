@@ -159,7 +159,8 @@ nav a:hover {
   margin: 0;
   background-color: var(--primary);
   padding: 0.625rem;
-  border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  font-weight: var(--light-font-weight);
 }
 
 .card-body {
