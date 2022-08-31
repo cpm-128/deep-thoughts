@@ -33,12 +33,12 @@ body {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Inconsolata', monospace;
+  font-family: var(--paragraph-font);
   font-weight: 400;
   line-height: 1.5;
   font-size: 20px;
   color: var(--dark);
-  background-color: #f3fffee1;
+  background-color: var(--light);
 }
 
 h1,
@@ -56,6 +56,7 @@ h6 {
 
 h1 {
   font-size: 2.25rem;
+  color: var(--light);
 }
 
 h2 {
@@ -154,9 +155,9 @@ nav a:hover {
 }
 
 .card-header {
-  color: var(--secondary);
+  color: var(--light);
   margin: 0;
-  background-color: var(--dark);
+  background-color: var(--primary);
   padding: 0.625rem;
   border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
 }
@@ -164,6 +165,7 @@ nav a:hover {
 .card-body {
   padding: 2.5%;
   font-size: 1.4rem;
+  background-color: var(--secondary);
 }
 
 /* FORM */
@@ -791,6 +793,7 @@ nav a:hover {
 /* BACKGROUND UTILS */
 .bg-primary {
   background-color: var(--primary);
+  color: var(--light);
 }
 
 .bg-secondary {
