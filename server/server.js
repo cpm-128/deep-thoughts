@@ -37,6 +37,11 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
+// wildcard for pages not found
+app.get('*', (req, res) => {
+  res.status(404).sendFile(path.join(__dirname, './public/404.html'));
+})
+
 // create a new intance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
