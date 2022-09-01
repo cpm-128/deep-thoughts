@@ -791,6 +791,10 @@ nav a:hover {
   color: var(--error);
 }
 
+.radius {
+  border-radius: var(--border-radius);
+}
+
 /* BACKGROUND UTILS */
 .bg-primary {
   background-color: var(--primary);
