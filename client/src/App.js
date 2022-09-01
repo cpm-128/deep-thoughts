@@ -34,6 +34,7 @@ function App() {
         <div className='flex-column justify-flex-start min-100-vh'>
           <Header />
           <div className='container'>
+            {/* only routes that the app will utilize */}
             <Routes>
               {/* HOME */}
               <Route
@@ -51,13 +52,15 @@ function App() {
                 element={<Signup />}
               />
               {/* PROFILE */}
-              <Route
-                path='/profile'
-                element={<Profile />}
-              />
+              <Route path='/profile'>
+                {/* /profile/thought.username, the /profile is inherited */}
+                <Route path=':username' element={<Profile />}></Route>
+                {/* if not username in slug, setup to default to loggedin user's profile */}
+                <Route path='' element={<Profile />}></Route>
+              </Route>
               {/* SINGLE THOUGHT */}
               <Route
-                path='/thought'
+                path='/thought/:id'
                 element={<SingleThought />}
               />
               {/* NOT FOUND */}
