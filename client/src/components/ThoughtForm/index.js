@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 
 import { ADD_THOUGHT } from '../../utils/mutations';
-import { QUERY_THOUGHTS } from '../../utils/queries';
+import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
 
 // ThoughtForm functional component
 const ThoughtForm = () => {
@@ -12,6 +12,17 @@ const ThoughtForm = () => {
         // update cache manually to display thoughts on page without refreshing which is when cache would normally be grabbed and renders updated
         // addThought represents the new thought in the form we are adding
         update(cache, { data: { addThought } }) {
+
+            // try updating the user's array first
+            try {
+                const { me } = cache.readQuery({ query: QUERY_ME});
+                cache.writeQuery({
+                    query: QUERY_ME,
+                    data: { me: {...me, thoughts: [...me.thoughts, addThought] } },
+                });
+            } catch (e) {
+                console.warn('First thought insertion by user.')
+            }
 
             // read what's currently in the cache
             const { thoughts } = cache.readQuery({ query: QUERY_THOUGHTS });
