@@ -4,8 +4,8 @@
 Combine all four technologies of the MERN stack (MongoDB, Express.js, React, and Node.js) to build a social media application called Deep Thoughts. Users will be able to sign up and create an account, post their thoughts, and interact with other users, just like you might find in the social media apps you use day in and day out in real life.
 
 ## Application
-- Repo: <a href='https://github.com/cpm-128/deep-thoughts' target='_blank'>https://github.com/cpm-128/deep-thoughts</a>
-- Deployed
+- Repo: <a href='https://github.com/cpm-128/deep-thoughts' target='_blank'>https://github.com/cpm-128/deep-thoughts</a><br>
+- Deployed <a href='https://murmuring-bastion-58732.herokuapp.com/' target='_blank'>https://murmuring-bastion-58732.herokuapp.com/</a>
 
 ## Tools
 - GraphQL is a query language for APIs and a runtime for fulfilling queries with your existing data, giving clients the power to ask for exactly what they need and nothing more. For this module’s application, you’ll use the graphql package to parse GraphQL syntax in both your front-end and back-end codebase.
