@@ -1,12 +1,29 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
+
 import { ADD_THOUGHT } from '../../utils/mutations';
+import { QUERY_THOUGHTS } from '../../utils/queries';
 
 // ThoughtForm functional component
 const ThoughtForm = () => {
 
     // ability to submit a thought
-    const [addThought, { error }] = useMutation(ADD_THOUGHT);
+    const [addThought, { error }] = useMutation(ADD_THOUGHT, {
+        // update cache manually to display thoughts on page without refreshing which is when cache would normally be grabbed and renders updated
+        // addThought represents the new thought in the form we are adding
+        update(cache, { data: { addThought } }) {
+
+            // read what's currently in the cache
+            const { thoughts } = cache.readQuery({ query: QUERY_THOUGHTS });
+
+            // prepend the newest thought to the front of the array
+            cache.writeQuery({
+                query: QUERY_THOUGHTS,
+                data: { thoughts: [addThought, ...thoughts] }
+            });
+
+        }
+    });
 
     // character handling on thoughtForm
     const [thoughtText, setText] = useState('');

@@ -94,9 +94,9 @@ a {
   text-decoration: none;
 }
 
-a:visited {
+/* a:visited {
   color: inherit;
-}
+} */
 
 nav {
   width: 100%;
