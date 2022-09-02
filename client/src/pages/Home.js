@@ -1,9 +1,12 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { QUERY_THOUGHTS, QUERY_ME_BASIC } from '../utils/queries';
+
 import ThoughtList from '../components/ThoughtList';
-import Auth from '../utils/auth';
 import FriendList from '../components/FriendList';
+import ThoughtForm from '../components/ThoughtForm';
+
+import { QUERY_THOUGHTS, QUERY_ME_BASIC } from '../utils/queries';
+import Auth from '../utils/auth';
 
 const Home = () => {
 
@@ -24,6 +27,14 @@ const Home = () => {
   return (
     <main>
       <div className='flex-row justify-space-between'>
+
+        {/* THOUGHT FORM if logged in */}
+        {/* this is above the flex row below, instead of added to the ifLoggedIn check, for formatting purposes: keep thoughtList and friendList aligned */}
+        {loggedIn && (
+          <div className='col-12 mb-3'>
+            <ThoughtForm />
+          </div>
+        )}
 
         {/* if not logged in, full width; if logged in, 8/12 */}
         <div className={`col-12 mb-3 ${loggedIn && 'col-lg-8'}`}>
